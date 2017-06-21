@@ -1,0 +1,108 @@
+---
+title: "Prov"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+title: "Mapas por municipios"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Mapas por municipios
+
+## Instalar y ejecutar paquetes
+
+*IMPORTANTE:* La primera vez que se usa este programa, es necesario correr lo siguiente para instalar los paquetes necesarios
+```{r Instalar}
+install.packages('maptools')
+install.packages('dplyr')
+install.packages('data.table')
+install.packages('reshape2')
+install.packages('ggplot2')
+install.packages('plyr')
+install.packages('rgdal')
+install.packages('rgeos')
+```
+
+*IMPORTANTE:* Es necesario correr esto al principio de cada sesi?n
+```{r Ejecutar}
+library(maptools)
+library(dplyr)
+library(data.table)
+library(reshape2)
+library(ggplot2)
+library(plyr)
+library(rgdal)
+library(rgeos)
+```
+
+
+## Combinar mapa con datos
+
+```{r Definir directorio}
+setwd("H:/DATOS_BBVAResearch/PUZZLE_SC001328/programas R/mapas/Municipios")
+```
+
+```{r Cargar mapa}
+map=readShapeSpatial('prov_map.shp')
+map@data$CodProv=as.integer(map@data$CodProv)
+```
+
+```{r Combinar con datos}
+data=read.csv("Prov.csv",sep=";") #carga el Excel con datos
+map@data=merge(map@data,data,by.x='CodProv',by.y='CodProv',sort=F) #combina el mapa con los datos
+```
+
+Modificar los datos
+```{r Modificar los datos}
+#Aqu? se puede modificar los datos antes de dibujarlos si es necesario
+```
+
+
+*IMPORTANTE:* correr esto despu?s de cada modificaci?n a los datos
+```{r Pasar a ggplot}
+map@data$id=rownames(map@data)
+map.points=fortify(map,region='id')
+map.df=join(map.points,map@data,by='id')
+```
+
+
+##Dibujar el mapa:
+modificando la variable despu?s de fill se puede colorear el mapa seg?n la variable deseada
+Los colores de BBVA en c?digo son: 
+ #006EC1 #009EE5 #52BCEC #89D1F3 #B5E5F9
+
+### 1. *Dibuja todo el mapa*
+```{r Todo el mapa}
+ggplot(map.df)+
+  aes(long,lat,group=group,fill=log(Pob))+ #reemplazar Pob por el nombre de la variable de data con la que se quiera colorear
+  geom_polygon()+
+  geom_path(color='white')+
+  coord_equal()+
+  scale_fill_gradient2(low='#89D1F3',high='#006EC1')+
+  #en la parte inferior se limpia el mapa de ejes con coordenadas, etc
+  theme(legend.position='bottom',axis.title.x=element_blank(),axis.title.y=element_blank(),axis.ticks=element_blank(),axis.text=element_blank(),panel.grid.minor=element_blank(),panel.grid.major=element_blank())
+```
+
+
+### 2. *Dibujar una CCAA (dos d?gitos)*
+```{r CCAA}
+ggplot(subset(map.df,map.df$Cod_CCAA=="11"))+
+  aes(long,lat,group=group,fill=log(Pob))+
+  geom_polygon()+
+  geom_path(color='white')+
+  coord_equal()+
+  scale_fill_gradient2(low='#89D1F3',high='#006EC1')+
+  #en la parte inferior se limpia el mapa de ejes con coordenadas, etc
+  theme(legend.position='bottom',axis.title.x=element_blank(),axis.title.y=element_blank(),axis.ticks=element_blank(),axis.text=element_blank(),panel.grid.minor=element_blank(),panel.grid.major=element_blank())
+```
+
+
