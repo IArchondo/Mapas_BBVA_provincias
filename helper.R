@@ -8,7 +8,7 @@ library(rgdal)
 library(rgeos)
 
 
-setwd("/Users/IArchondo/Desktop/R/Proyectos personales/Shiny/MapsBBVA2")
+#setwd("/Users/IArchondo/Desktop/R/Proyectos personales/Shiny/MapsBBVA2")
 #cargcomb=function(datax,setter,zah,varnom){
 graphing=function(datax,setter,selCCAA,varsel,slidermed){
 #cargcomb=function(datax){
@@ -32,12 +32,12 @@ graphing=function(datax,setter,selCCAA,varsel,slidermed){
           aes_string("long","lat",group="group",fill=varsel)+ #reemplazar Pob por el nombre de la variable de data con la que se quiera colorear
           geom_polygon()+
           geom_path(color='white')+
-          coord_equal()+
-          scale_fill_gradient2(low='#89D1F3',high='#006EC1'
-                               ,midpoint = slidermed*max(map.df[dicc])
-          )+
-          #en la parte inferior se limpia el mapa de ejes con coordenadas, etc
-          theme(legend.position='bottom',axis.title.x=element_blank(),axis.title.y=element_blank(),axis.ticks=element_blank(),axis.text=element_blank(),panel.grid.minor=element_blank(),panel.grid.major=element_blank())
+          coord_equal()
+        # +
+        #   scale_fill_gradient2(low='#89D1F3',high='#006EC1'
+        #                        ,midpoint = slidermed*max(map.df[dicc])
+        #   )+
+        #   theme(legend.position='bottom',axis.title.x=element_blank(),axis.title.y=element_blank(),axis.ticks=element_blank(),axis.text=element_blank(),panel.grid.minor=element_blank(),panel.grid.major=element_blank())
         return(mapa)
       }
       else {
@@ -46,12 +46,12 @@ graphing=function(datax,setter,selCCAA,varsel,slidermed){
           aes_string("long","lat",group="group",fill=varsel)+ #reemplazar Pob por el nombre de la variable de data con la que se quiera colorear
           geom_polygon()+
           geom_path(color='white')+
-          coord_equal()+
-          scale_fill_gradient2(low='#89D1F3',high='#006EC1'
-                               ,midpoint = slidermed*max(map.dfx[dicc])
-          )+
-          #en la parte inferior se limpia el mapa de ejes con coordenadas, etc
-          theme(legend.position='bottom',axis.title.x=element_blank(),axis.title.y=element_blank(),axis.ticks=element_blank(),axis.text=element_blank(),panel.grid.minor=element_blank(),panel.grid.major=element_blank())
+          coord_equal()
+        # +
+        #   scale_fill_gradient2(low='#89D1F3',high='#006EC1'
+        #                        ,midpoint = slidermed*max(map.dfx[dicc])
+        #   )+
+        #   theme(legend.position='bottom',axis.title.x=element_blank(),axis.title.y=element_blank(),axis.ticks=element_blank(),axis.text=element_blank(),panel.grid.minor=element_blank(),panel.grid.major=element_blank())
         return(mapa)
       }
     }
