@@ -101,21 +101,24 @@ shinyServer(function(input, output,session) {
   # mapper=reactive({cargcomb(dataini)
   # })
   
+  temaBBVA=theme(legend.position='bottom',axis.title.x=element_blank(),
+                 axis.title.y=element_blank(),axis.ticks=element_blank(),axis.text=element_blank(),
+                 panel.grid.minor=element_blank(),panel.grid.major=element_blank())
+  
   #---------------------------------------------------------------------
   ##            DIBUJA EL GRAFICO             ##
   output$plot=renderPlot({
-    
-    
+  
     mapa=graphing(dataini,input$setter,input$selCCAA,input$varsel,input$slidermed)
     
     dicc=grep(input$varsel,colnames(mapa[[2]]))
-    print (dicc)
     
-    mapa[[1]]+theme(legend.position='bottom',axis.title.x=element_blank(),axis.title.y=element_blank(),axis.ticks=element_blank(),axis.text=element_blank(),panel.grid.minor=element_blank(),panel.grid.major=element_blank())
-    # +
-    #     scale_fill_gradient2(low='#89D1F3',high='#006EC1'
-                             #,midpoint = slidermed*max(mapa[1][dicc])
-       # )
+    print(head(mapa[[2]]))
+    
+    grafico=mapa[[1]]+
+      temaBBVA
+    
+    grafico
         
   })
   
