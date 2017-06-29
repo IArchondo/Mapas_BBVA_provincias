@@ -52,6 +52,11 @@ graphing=function(datax,setter,selCCAA,varsel,slidermed){
 #modificador
 
 modif=function(ggpl,mpdf,colmin='#89D1F3',colmax='#006EC1',medcheck,slidermed,acc){
+  if (is.factor(mpdf[[acc]])==TRUE){
+    plot=ggpl
+    return(plot)
+  }
+  else{
   if (medcheck==FALSE){
     plot=ggpl+
       scale_fill_gradient2(low=colmin,high=colmax)
@@ -61,7 +66,7 @@ modif=function(ggpl,mpdf,colmin='#89D1F3',colmax='#006EC1',medcheck,slidermed,ac
     plot=ggpl+
       scale_fill_gradient2(low=colmin,high=colmax,midpoint=slidermed*max(mpdf[acc]))
     return(plot)
-  }
+  }}
   
 }
 
