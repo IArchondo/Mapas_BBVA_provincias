@@ -104,46 +104,10 @@ shinyServer(function(input, output,session) {
   #---------------------------------------------------------------------
   ##            DIBUJA EL GRAFICO             ##
   output$plot=renderPlot({
-    #cargcomb(dataini)
-    # map=readShapeSpatial('prov_map.shp')
-    # map@data$CodProv=as.integer(map@data$CodProv)
-    # map@data=merge(map@data,dataini,by.x='CodProv',by.y='CodProv',sort=F) #combina el mapa con los datos
-    # map@data$id=rownames(map@data)
-    # map.points=fortify(map,region='id')
-    # map.df=join(map.points,map@data,by='id')
-    # map.df$Cd_CCAAint=as.integer(map.df$Cd_CCAA)
     
     
     mapa=graphing(dataini,input$setter,input$selCCAA,input$varsel,input$slidermed)
-    # if(input$varsel=="-"){return (NULL)}
-    # else {
-    #   dicc=grep(input$varsel,colnames(map.df))
-    #   if (input$setter==0){
-    #     ggplot(map.df)+
-    #       aes_string("long","lat",group="group",fill=input$varsel)+ #reemplazar Pob por el nombre de la variable de data con la que se quiera colorear
-    #       geom_polygon()+
-    #       geom_path(color='white')+
-    #       coord_equal()+
-    #       scale_fill_gradient2(low='#89D1F3',high='#006EC1'
-    #                            ,midpoint = input$slidermed*max(map.df[dicc])
-    #       )+
-    #       #en la parte inferior se limpia el mapa de ejes con coordenadas, etc
-    #       theme(legend.position='bottom',axis.title.x=element_blank(),axis.title.y=element_blank(),axis.ticks=element_blank(),axis.text=element_blank(),panel.grid.minor=element_blank(),panel.grid.major=element_blank())
-    #   } 
-    #   else {
-    #     map.dfx<<-subset(map.df,map.df$Cd_CCAAint==input$selCCAA)
-    #     ggplot(map.dfx)+
-    #       aes_string("long","lat",group="group",fill=input$varsel)+ #reemplazar Pob por el nombre de la variable de data con la que se quiera colorear
-    #       geom_polygon()+
-    #       geom_path(color='white')+
-    #       coord_equal()+
-    #       scale_fill_gradient2(low='#89D1F3',high='#006EC1'
-    #                            ,midpoint = input$slidermed*max(map.dfx[dicc])
-    #       )+
-    #       #en la parte inferior se limpia el mapa de ejes con coordenadas, etc
-    #       theme(legend.position='bottom',axis.title.x=element_blank(),axis.title.y=element_blank(),axis.ticks=element_blank(),axis.text=element_blank(),panel.grid.minor=element_blank(),panel.grid.major=element_blank())
-    #   }
-    # }
+    
     mapa
   })
   
