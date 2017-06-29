@@ -58,13 +58,21 @@ shinyUI(fluidPage(
                            checkboxInput("automed",label="Incluir",value=FALSE)))),
                   tabPanel("Agregar datos",
                            fluidRow(column(12,h3("Cargar más datos"))),
-                           fluidRow(column(12,helpText("El csv tiene que contener una columna llamada CodProv con los códigos de provincia"))),
+                           fluidRow(column(12,helpText("El csv tiene que contener una columna 
+                                                       llamada CodProv con los códigos de provincia"))),
                            fluidRow(column(4,fileInput("ruta",h4("Cargar un .csv"))),
                                     column(3,actionButton("merge","importar"))),
                            div(style = 'overflow-x: scroll', tableOutput("csvdata"))),
                   tabPanel("Tabla total",
                            div(style = 'overflow-x: scroll', tableOutput("datatot"))),
-                  tabPanel("Variables",tableOutput("tabvar"))
+                  tabPanel("Variables/Cortar variables",
+                           fluidRow(column(12,h3("Cortar variables"))),
+                           fluidRow(column(12,helpText("Introducir el nombre de la nueva variable y los 
+                                                       puntos de corte"))),
+                           fluidRow(column(6,textInput("nomcor","Nombre nueva variable",value=""),
+                                           textInput("pun_cortes","Puntos de corte",value="")),
+                                    column(6,br(),br(),br(),br(),br(),actionButton("cortbutt","Cortar"))),
+                           tableOutput("tabvar"))
                   
       )
     )
