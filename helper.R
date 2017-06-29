@@ -8,6 +8,14 @@ library(rgdal)
 library(rgeos)
 
 
+cortador=function(dat,str,var){
+  dicc_cut=grep(var,colnames(dat))
+  cutvar=as.numeric(unlist(strsplit(str,split=",")))
+  cuteado=cut(dat[[dicc_cut]],breaks=cutvar,include.lowest = T)
+  return(cuteado)
+}
+
+
 #setwd("/Users/IArchondo/Desktop/R/Proyectos personales/Shiny/MapsBBVA2")
 graphing=function(datax,setter,selCCAA,varsel,slidermed){
   map=readShapeSpatial('prov_map.shp')

@@ -43,7 +43,7 @@ shinyServer(function(input, output,session) {
     datacsv()
   })
   
-  #combinamos los datos importados con los de la tabla principal
+  #BOTON combinamos los datos importados con los de la tabla principal
   observeEvent(input$merge,{
     datainiprev<<-merge(dataini,datacsv(),by="CodProv",all.x=TRUE)
     datainiprev=datainiprev[, -grep(".y", colnames(datainiprev))]
@@ -61,6 +61,12 @@ shinyServer(function(input, output,session) {
       data.frame(unclass(summary(dataini[3:ncol(dataini)])),check.names = F,stringsAsFactors = F)
     })
     updateTabsetPanel(session, "tabs1 ",selected = "Tabla total")
+  })
+  
+  #BOTON cortar
+  observeEvent(input$cortbutt,{
+    datcor=cortador(dataini,input$pun_cortes,input$varselcut)
+    print(datcor)
   })
   
   
@@ -85,6 +91,7 @@ shinyServer(function(input, output,session) {
     
   })
   
+  #label de region
   output$textreg=renderText({
     ccaa=c("-","Andalucía","Aragón","Asturias","Baleares","Canarias","Cantabria","Castilla y León",
            "Castilla La Mancha","Cataluña","Comunitat Valenciana","Extremadura","Galicia","Madrid",
@@ -97,6 +104,7 @@ shinyServer(function(input, output,session) {
     else {banner}
   })
   
+  #temaBBVA
   temaBBVA=theme(legend.position='bottom',axis.title.x=element_blank(),
                  axis.title.y=element_blank(),axis.ticks=element_blank(),axis.text=element_blank(),
                  panel.grid.minor=element_blank(),panel.grid.major=element_blank())
