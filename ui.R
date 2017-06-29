@@ -61,7 +61,10 @@ shinyUI(fluidPage(
                            fluidRow(column(12,helpText("El csv tiene que contener una columna 
                                                        llamada CodProv con los códigos de provincia"))),
                            fluidRow(column(4,fileInput("ruta",h4("Cargar un .csv"))),
-                                    column(3,actionButton("merge","importar"))),
+                                    column(6,br(),br(),
+                                           actionButton("merge","Importar",icon("magic"),width="150px",
+                                                        style="color: #fff; background-color: #337ab7; 
+                                                        border-color: #2e6da4"))),
                            div(style = 'overflow-x: scroll', tableOutput("csvdata"))),
                   tabPanel("Tabla total",
                            div(style = 'overflow-x: scroll', tableOutput("datatot"))),

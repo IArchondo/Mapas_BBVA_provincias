@@ -45,6 +45,8 @@ shinyServer(function(input, output,session) {
   
   #BOTON combinamos los datos importados con los de la tabla principal
   observeEvent(input$merge,{
+    if(is.null(input$ruta)){}
+    else{
     datainiprev<<-merge(dataini,datacsv(),by="CodProv",all.x=TRUE)
     datainiprev=datainiprev[, -grep(".y", colnames(datainiprev))]
     nom=colnames(datainiprev)
@@ -61,10 +63,13 @@ shinyServer(function(input, output,session) {
       data.frame(unclass(summary(dataini[3:ncol(dataini)])),check.names = F,stringsAsFactors = F)
     })
     updateTabsetPanel(session, "tabs1 ",selected = "Tabla total")
+    }
   })
   
   #BOTON cortar
   observeEvent(input$cortbutt,{
+    if (input$varselcut=="-"){}
+    else{
     datcor=cortador(dataini,input$pun_cortes,input$varselcut)
     datacut=dataini
     datacut[,input$nomcor]=datcor
@@ -79,6 +84,7 @@ shinyServer(function(input, output,session) {
       data.frame(unclass(summary(dataini[3:ncol(dataini)])),check.names = F,stringsAsFactors = F)
     })
     updateTabsetPanel(session, "tabs1 ",selected = "Tabla total")
+    }
   })
   
   
