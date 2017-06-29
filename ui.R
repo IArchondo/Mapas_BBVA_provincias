@@ -69,6 +69,9 @@ shinyUI(fluidPage(
                            fluidRow(column(12,h3("Cortar variables"))),
                            fluidRow(column(12,helpText("Introducir el nombre de la nueva variable y los 
                                                        puntos de corte"))),
+                           fluidRow(column(12,
+                                           selectInput("varselcut",label="Selecciona la variable a cortar",
+                                                       choices=c("-"),selected="-"))),
                            fluidRow(column(4,textInput("nomcor","Nombre nueva variable",value=""),
                                            textInput("pun_cortes","Puntos de corte",value="")),
                                     column(6,br(),br(),br(),br(),br(),
