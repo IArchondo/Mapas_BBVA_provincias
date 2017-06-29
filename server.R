@@ -122,6 +122,12 @@ shinyServer(function(input, output,session) {
     else {banner}
   })
   
+  #botonexportador
+  observeEvent(input$export,{
+   print(graf.fin)
+  }
+  )
+  
   #temaBBVA
   temaBBVA=theme(legend.position='bottom',axis.title.x=element_blank(),
                  axis.title.y=element_blank(),axis.ticks=element_blank(),axis.text=element_blank(),
@@ -140,14 +146,16 @@ shinyServer(function(input, output,session) {
       if (input$sel_col==0){
         plot=modif(ggpl=mapa[[1]],mpdf=mapa[[2]],medcheck=input$automed,slidermed=input$slidermed,
                    acc=dicc)
-        plot+
+        graf.fin<<-plot+
           temaBBVA
+        graf.fin
       }
       else{
         plot=modif(ggpl=mapa[[1]],mpdf=mapa[[2]],medcheck=input$automed,slidermed=input$slidermed,
                    acc=dicc,colmin=input$entmin,colmax=input$entmax)
-        plot+
+        graf.fin<<-plot+
           temaBBVA
+        graf.fin
       }
     }
     

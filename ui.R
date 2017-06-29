@@ -42,11 +42,12 @@ shinyUI(fluidPage(
       tabsetPanel(id="tabs1",
                   tabPanel("Mapa",
                            fluidRow(column(12,br())),
-                           fluidRow(column(6,strong("Variable",style="color:#006EC1")),
-                                    column(6,strong("Región",style="color:#006EC1"))),
-                           fluidRow(column(6,h4(textOutput("textvar"),style="color:#009EE5")),
-                                    column(6,h4(textOutput("textreg"),style="color:#009EE5"))
-                  ),
+                           fluidRow(column(4,strong("Variable",style="color:#006EC1")),
+                                    column(4,strong("Región",style="color:#006EC1"))),
+                           fluidRow(column(4,h4(textOutput("textvar"),style="color:#009EE5")),
+                                    column(4,h4(textOutput("textreg"),style="color:#009EE5")),
+                                    column(4,actionButton("export","Exportar",width="200px",icon("print"),style="color: #fff; background-color: #337ab7; 
+                                        border-color: #2e6da4"))),
                   plotOutput("plot",height="400px"),
                   fluidRow(column(12,br())),
                   fluidRow(column(6,h4("Colores",style="color:#006EC1")),
@@ -71,7 +72,7 @@ shinyUI(fluidPage(
                   tabPanel("Variables/Cortar variables",
                            fluidRow(column(12,h3("Cortar variables"))),
                            fluidRow(column(12,helpText("Introducir el nombre de la nueva variable y los 
-                                                       puntos de corte"))),
+                                                       puntos de corte separados por comas (ej: 3,5,8)"))),
                            fluidRow(column(4,
                                            selectInput("varselcut",label="Selecciona la variable a cortar",
                                                        choices=c("-"),selected="-"))),
