@@ -58,7 +58,7 @@ shinyUI(fluidPage(
                   fluidRow(column(3,radioButtons("sel_col","",choices=c("BBVA"=0,"Personalizado"=1),selected=0)),
                            column(2,textInput("entmin","Min",value=""),textInput("entmax","Max",value="")),
                            column(1,br()),
-                           column(6,sliderInput("slidermed2",NULL,min=0,max=1,value=0.5),
+                           column(6,sliderInput("slidermed",NULL,min=0,max=1,value=0.5),
                            checkboxInput("automed",label="Incluir",value=FALSE)))),
                   #Agregar datos
                   tabPanel("Agregar datos",

@@ -44,7 +44,17 @@ graphing=function(datax,setter,selCCAA,varsel,slidermed){
 
 #modificador
 
-modif=function(ggpl,mpdf,colmin='#89D1F3',colmax='#006EC1',medcheck,slidermed){
+modif=function(ggpl,mpdf,colmin='#89D1F3',colmax='#006EC1',medcheck,slidermed,acc){
+  if (medcheck==FALSE){
+    plot=ggpl+
+      scale_fill_gradient2(low=colmin,high=colmax)
+    return(plot)
+  }
+  else{
+    plot=ggpl+
+      scale_fill_gradient2(low=colmin,high=colmax,midpoint=slidermed*max(mpdf[acc]))
+    return(plot)
+  }
   
 }
 

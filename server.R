@@ -113,13 +113,23 @@ shinyServer(function(input, output,session) {
     
     dicc=grep(input$varsel,colnames(mapa[[2]]))
     
-    print(head(mapa[[2]]))
-    
     if (is.null(mapa[[1]])){}
     else{
-    mapa[[1]]+
-      temaBBVA+
-      scale_fill_gradient2(low='#89D1F3',high='#006EC1')
+    # mapa[[1]]+
+    #   temaBBVA+
+    #   scale_fill_gradient2(low='#89D1F3',high='#006EC1')
+      if (input$sel_col==0){
+        plot=modif(ggpl=mapa[[1]],mpdf=mapa[[2]],medcheck=input$automed,slidermed=input$slidermed,
+                   acc=dicc)
+        plot+
+          temaBBVA
+      }
+      else{
+        plot=modif(ggpl=mapa[[1]],mpdf=mapa[[2]],medcheck=input$automed,slidermed=input$slidermed,
+                   acc=dicc,colmin=input$entmin,colmax=input$entmax)
+        plot+
+          temaBBVA
+      }
     }
     
         
