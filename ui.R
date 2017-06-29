@@ -40,8 +40,8 @@ shinyUI(fluidPage(
       selectInput("varsel",label=h3("Selecciona la variable"),choices=c("-"),selected="-"),
       h3("Región"),
       radioButtons("setter",h4("Elige la región"),choices=c("Toda España"=0,"CCAA"=1),selected=0),
-      selectInput("selCCAA",h4("Elige CCAA"),choices=codccaa,selected="-"),
-      h3("Valor medio de la escala de colores")
+      selectInput("selCCAA",h4("Elige CCAA"),choices=codccaa,selected="-")
+      #h3("Valor medio de la escala de colores")
       #checkboxInput("automed",label="Automáticamente",value=TRUE),
       #sliderInput("slidermed","Manualmente",min=0,max=1,value=0.5)
     ),
@@ -60,8 +60,9 @@ shinyUI(fluidPage(
                            column(6,strong("Punto medio",style="color:#006EC1"))),
                   fluidRow(column(3,radioButtons("sel_col","",choices=c("BBVA"=0,"Personalizado"=1),selected=0)),
                            column(3,br()),
+                           column(6,sliderInput("slidermed2",NULL,min=0,max=1,value=0.5))),
+                  fluidRow(column(6,br()),
                            column(6,checkboxInput("automed",label="Incluir",value=TRUE))),
-                           #column(6,sliderInput("slidermed2","Manualmente",min=0,max=1,value=0.5))),
                   #Agregar datos
                   tabPanel("Agregar datos",
                            #fluidRow(column(12,br())),
