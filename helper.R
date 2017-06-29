@@ -8,7 +8,7 @@ library(rgdal)
 library(rgeos)
 
 
-#setwd("/Users/IArchondo/Desktop/R/Proyectos personales/Shiny/MapsBBVA2")
+setwd("/Users/IArchondo/Desktop/R/Proyectos personales/Shiny/MapsBBVA2")
 #cargcomb=function(datax,setter,zah,varnom){
 graphing=function(datax,setter,selCCAA,varsel,slidermed){
 #cargcomb=function(datax){
