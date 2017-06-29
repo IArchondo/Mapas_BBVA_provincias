@@ -66,7 +66,19 @@ shinyServer(function(input, output,session) {
   #BOTON cortar
   observeEvent(input$cortbutt,{
     datcor=cortador(dataini,input$pun_cortes,input$varselcut)
-    print(datcor)
+    datacut=dataini
+    datacut[,input$nomcor]=datcor
+    dataini<<-datacut
+    
+    output$datatot=renderTable({
+      dataini
+    })
+    updateSelectInput(session,"varsel",choices=c("-",colnames(dataini)[3:length(colnames(dataini))]))
+    updateSelectInput(session,"varselcut",choices=c("-",colnames(dataini)[3:length(colnames(dataini))]))
+    output$tabvar=renderTable({
+      data.frame(unclass(summary(dataini[3:ncol(dataini)])),check.names = F,stringsAsFactors = F)
+    })
+    updateTabsetPanel(session, "tabs1 ",selected = "Tabla total")
   })
   
   
