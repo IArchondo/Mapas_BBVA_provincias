@@ -56,6 +56,7 @@ shinyServer(function(input, output,session) {
       dataini
     })
     updateSelectInput(session,"varsel",choices=c("-",colnames(dataini)[3:length(colnames(dataini))]))
+    updateSelectInput(session,"varselcut",choices=c("-",colnames(dataini)[3:length(colnames(dataini))]))
     output$tabvar=renderTable({
       data.frame(unclass(summary(dataini[3:ncol(dataini)])),check.names = F,stringsAsFactors = F)
     })
@@ -66,6 +67,10 @@ shinyServer(function(input, output,session) {
   #actualizamos la lista de variables con los datos cargados
   observe({
     updateSelectInput(session,"varsel",choices=c("-",colnames(dataini)[3:length(colnames(dataini))]))
+  })
+  
+  observe({
+    updateSelectInput(session,"varselcut",choices=c("-",colnames(dataini)[3:length(colnames(dataini))]))
   })
   
   
