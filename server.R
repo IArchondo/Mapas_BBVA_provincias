@@ -115,10 +115,13 @@ shinyServer(function(input, output,session) {
     
     print(head(mapa[[2]]))
     
-    grafico=mapa[[1]]+
-      temaBBVA
+    if (is.null(mapa[[1]])){}
+    else{
+    mapa[[1]]+
+      temaBBVA+
+      scale_fill_gradient2(low='#89D1F3',high='#006EC1')
+    }
     
-    grafico
         
   })
   

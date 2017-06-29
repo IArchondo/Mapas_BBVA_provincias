@@ -42,3 +42,10 @@ graphing=function(datax,setter,selCCAA,varsel,slidermed){
     }
 }
 
+#modificador
+
+modif=function(ggpl,mpdf,colmin='#89D1F3',colmax='#006EC1',medcheck,slidermed){
+  
+}
+
+
