@@ -69,9 +69,11 @@ shinyUI(fluidPage(
                            fluidRow(column(12,h3("Cortar variables"))),
                            fluidRow(column(12,helpText("Introducir el nombre de la nueva variable y los 
                                                        puntos de corte"))),
-                           fluidRow(column(6,textInput("nomcor","Nombre nueva variable",value=""),
+                           fluidRow(column(4,textInput("nomcor","Nombre nueva variable",value=""),
                                            textInput("pun_cortes","Puntos de corte",value="")),
-                                    column(6,br(),br(),br(),br(),br(),actionButton("cortbutt","Cortar"))),
+                                    column(6,br(),br(),br(),br(),br(),
+                                           actionButton("cortbutt","   Cortar",width='150px',icon("scissors"),
+                                                        style="color: #fff; background-color: #337ab7; border-color: #2e6da4"))),
                            tableOutput("tabvar"))
                   
       )
