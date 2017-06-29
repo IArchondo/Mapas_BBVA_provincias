@@ -5,10 +5,6 @@ ccaa=c("-","Andalucía","Aragón","Asturias","Baleares","Canarias","Cantabria","
        "Murcia","Navarra","País Vasco","La Rioja")
 codccaa=c(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17)
 names(codccaa)=ccaa
-#dfccaa=data.frame(cnames=ccaa,keys=codccaa)
-#chlst=dfccaa$keys
-#names(chlst)=dfccaa$cnames
-
 
 
 #01	Andalucía
@@ -60,9 +56,7 @@ shinyUI(fluidPage(
                            column(1,br()),
                            column(6,sliderInput("slidermed",NULL,min=0,max=1,value=0.5),
                            checkboxInput("automed",label="Incluir",value=FALSE)))),
-                  #Agregar datos
                   tabPanel("Agregar datos",
-                           #fluidRow(column(12,br())),
                            fluidRow(column(12,h3("Cargar más datos"))),
                            fluidRow(column(12,helpText("El csv tiene que contener una columna llamada CodProv con los códigos de provincia"))),
                            fluidRow(column(4,fileInput("ruta",h4("Cargar un .csv"))),

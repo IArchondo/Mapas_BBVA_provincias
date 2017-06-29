@@ -9,7 +9,6 @@ library(rgeos)
 
 
 #setwd("/Users/IArchondo/Desktop/R/Proyectos personales/Shiny/MapsBBVA2")
-#cargcomb=function(datax,setter,zah,varnom){
 graphing=function(datax,setter,selCCAA,varsel,slidermed){
   map=readShapeSpatial('prov_map.shp')
   map@data$CodProv=as.integer(map@data$CodProv)

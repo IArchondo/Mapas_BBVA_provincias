@@ -36,12 +36,6 @@ shinyServer(function(input, output,session) {
     read.csv(file=file1$datapath,sep=";")
   })
   
-  #ponemos el csv en el output
-  # output$tablecsv=renderTable({
-  #   if(is.null(datacsv())){return()}
-  #   input$ruta
-  # })
-  
   #ponemos los datos en el output
   output$csvdata=renderTable({
     Sys.setlocale('LC_ALL','C') 
@@ -98,9 +92,6 @@ shinyServer(function(input, output,session) {
     else {banner}
   })
   
-  # mapper=reactive({cargcomb(dataini)
-  # })
-  
   temaBBVA=theme(legend.position='bottom',axis.title.x=element_blank(),
                  axis.title.y=element_blank(),axis.ticks=element_blank(),axis.text=element_blank(),
                  panel.grid.minor=element_blank(),panel.grid.major=element_blank())
@@ -115,9 +106,6 @@ shinyServer(function(input, output,session) {
     
     if (is.null(mapa[[1]])){}
     else{
-    # mapa[[1]]+
-    #   temaBBVA+
-    #   scale_fill_gradient2(low='#89D1F3',high='#006EC1')
       if (input$sel_col==0){
         plot=modif(ggpl=mapa[[1]],mpdf=mapa[[2]],medcheck=input$automed,slidermed=input$slidermed,
                    acc=dicc)
