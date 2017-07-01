@@ -15,8 +15,6 @@ cortador=function(dat,str,var){
   return(cuteado)
 }
 
-
-#setwd("/Users/IArchondo/Desktop/R/Proyectos personales/Shiny/MapsBBVA2")
 graphing=function(datax,setter,selCCAA,varsel,slidermed){
   map=readShapeSpatial('prov_map.shp')
   map@data$CodProv=as.integer(map@data$CodProv)
@@ -53,18 +51,19 @@ graphing=function(datax,setter,selCCAA,varsel,slidermed){
 
 modif=function(ggpl,mpdf,colmin='#89D1F3',colmax='#006EC1',medcheck,slidermed,acc){
   if (is.factor(mpdf[[acc]])==TRUE){
-    plot=ggpl
+    plot=ggpl+
+      scale_fill_discrete(label=comma)
     return(plot)
   }
   else{
   if (medcheck==FALSE){
     plot=ggpl+
-      scale_fill_gradient2(low=colmin,high=colmax)
+      scale_fill_gradient2(low=colmin,high=colmax,label=comma)
     return(plot)
   }
   else{
     plot=ggpl+
-      scale_fill_gradient2(low=colmin,high=colmax,midpoint=slidermed*max(mpdf[acc]))
+      scale_fill_gradient2(low=colmin,high=colmax,midpoint=slidermed*max(mpdf[acc]),label=comma)
     return(plot)
   }}
   

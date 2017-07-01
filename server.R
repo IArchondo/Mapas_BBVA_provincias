@@ -11,13 +11,17 @@ library(plyr)
 library(rgdal)
 library(rgeos)
 library(shinyjs)
+library(scales)
 
 
 dataini<-read.csv("Prov2.csv",sep=";")
 
+#----------------------------------------------------------------------
+#----------------------------------------------------------------------
+##            OPERATIVO             ##
+
+
 shinyServer(function(input, output,session) {
-  
-  #cargcomb(dataini)
   
   #ponemos la data en el output  
   output$datatot=renderTable({
@@ -41,50 +45,6 @@ shinyServer(function(input, output,session) {
     Sys.setlocale('LC_ALL','C') 
     if(is.null(datacsv())){return()}
     datacsv()
-  })
-  
-  #BOTON combinamos los datos importados con los de la tabla principal
-  observeEvent(input$merge,{
-    if(is.null(input$ruta)){}
-    else{
-    datainiprev<<-merge(dataini,datacsv(),by="CodProv",all.x=TRUE)
-    datainiprev=datainiprev[, -grep(".y", colnames(datainiprev))]
-    nom=colnames(datainiprev)
-    nom=gsub(".x","",nom)
-    colnames(datainiprev)=nom
-    
-    dataini<<-datainiprev
-    output$datatot=renderTable({
-      dataini
-    })
-    updateSelectInput(session,"varsel",choices=c("-",colnames(dataini)[3:length(colnames(dataini))]))
-    updateSelectInput(session,"varselcut",choices=c("-",colnames(dataini)[3:length(colnames(dataini))]))
-    output$tabvar=renderTable({
-      data.frame(unclass(summary(dataini[3:ncol(dataini)])),check.names = F,stringsAsFactors = F)
-    })
-    updateTabsetPanel(session, "tabs1 ",selected = "Tabla total")
-    }
-  })
-  
-  #BOTON cortar
-  observeEvent(input$cortbutt,{
-    if (input$varselcut=="-"){}
-    else{
-    datcor=cortador(dataini,input$pun_cortes,input$varselcut)
-    datacut=dataini
-    datacut[,input$nomcor]=datcor
-    dataini<<-datacut
-    
-    output$datatot=renderTable({
-      dataini
-    })
-    updateSelectInput(session,"varsel",choices=c("-",colnames(dataini)[3:length(colnames(dataini))]))
-    updateSelectInput(session,"varselcut",choices=c("-",colnames(dataini)[3:length(colnames(dataini))]))
-    output$tabvar=renderTable({
-      data.frame(unclass(summary(dataini[3:ncol(dataini)])),check.names = F,stringsAsFactors = F)
-    })
-    updateTabsetPanel(session, "tabs1 ",selected = "Tabla total")
-    }
   })
   
   
@@ -122,17 +82,71 @@ shinyServer(function(input, output,session) {
     else {banner}
   })
   
-  #botonexportador
+  
+  
+  #----------------------------------------------------------------------
+  ##            BOTONES             ##
+  
+  #BOTON combinamos los datos importados con los de la tabla principal
+  observeEvent(input$merge,{
+    if(is.null(input$ruta)){}
+    else{
+      datainiprev<<-merge(dataini,datacsv(),by="CodProv",all.x=TRUE)
+      datainiprev=datainiprev[, -grep(".y", colnames(datainiprev))]
+      nom=colnames(datainiprev)
+      nom=gsub(".x","",nom)
+      colnames(datainiprev)=nom
+      
+      dataini<<-datainiprev
+      output$datatot=renderTable({
+        dataini
+      })
+      updateSelectInput(session,"varsel",choices=c("-",colnames(dataini)[3:length(colnames(dataini))]))
+      updateSelectInput(session,"varselcut",choices=c("-",colnames(dataini)[3:length(colnames(dataini))]))
+      output$tabvar=renderTable({
+        data.frame(unclass(summary(dataini[3:ncol(dataini)])),check.names = F,stringsAsFactors = F)
+      })
+      updateTabsetPanel(session, "tabs1 ",selected = "Tabla total")
+    }
+  })
+  
+  #BOTON cortar
+  observeEvent(input$cortbutt,{
+    if (input$varselcut=="-"){}
+    else{
+      datcor=cortador(dataini,input$pun_cortes,input$varselcut)
+      datacut=dataini
+      datacut[,input$nomcor]=datcor
+      dataini<<-datacut
+      
+      output$datatot=renderTable({
+        dataini
+      })
+      updateSelectInput(session,"varsel",choices=c("-",colnames(dataini)[3:length(colnames(dataini))]))
+      updateSelectInput(session,"varselcut",choices=c("-",colnames(dataini)[3:length(colnames(dataini))]))
+      output$tabvar=renderTable({
+        data.frame(unclass(summary(dataini[3:ncol(dataini)])),check.names = F,stringsAsFactors = F)
+      })
+      updateTabsetPanel(session, "tabs1 ",selected = "Tabla total")
+    }
+  })
+  
+  
+  # BOTON exportador
   observeEvent(input$export,{
    print(graf.fin)
   }
   )
+  
+  #---------------------------------------------------------------------
+  ##            ESTETiCA             ##
   
   #temaBBVA
   temaBBVA=theme(legend.position='bottom',axis.title.x=element_blank(),
                  axis.title.y=element_blank(),axis.ticks=element_blank(),axis.text=element_blank(),
                  panel.grid.minor=element_blank(),panel.grid.major=element_blank())
   
+  #---------------------------------------------------------------------
   #---------------------------------------------------------------------
   ##            DIBUJA EL GRAFICO             ##
   output$plot=renderPlot({
