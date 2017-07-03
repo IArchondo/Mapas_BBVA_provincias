@@ -67,11 +67,11 @@ shinyUI(fluidPage(
                                            actionButton("merge","Importar",icon("magic"),width="150px",
                                                         style="color: #fff; background-color: #337ab7; 
                                                         border-color: #2e6da4"))),
-                           div(style = 'overflow-x: scroll', tableOutput("csvdata"))),
+                           div(style='height:450px; overflow-y: scroll', tableOutput("csvdata"))),
                   tabPanel("Tabla total",
                            fluidRow(column(12,h3("Tabla de datos",style="color:#006EC1"))),
                            fluidRow(column(12,helpText("Tabla actualizada con los datos cargados en el programa"))),
-                           fluidRow(column(12,br(),div(style = 'overflow-y: scroll', tableOutput("datatot"))))),
+                           fluidRow(column(12,br(),div(style='height:600px; overflow-y: scroll', tableOutput("datatot"))))),
                   tabPanel("Variables/Cortar variables",
                            fluidRow(column(12,h3("Cortar variables",style="color:#006EC1"))),
                            fluidRow(column(12,helpText("Introducir el nombre de la nueva variable y los 

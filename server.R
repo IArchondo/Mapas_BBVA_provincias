@@ -12,6 +12,7 @@ library(rgdal)
 library(rgeos)
 library(shinyjs)
 library(scales)
+library(DT)
 
 
 dataini<-read.csv("Prov2.csv",sep=";")
