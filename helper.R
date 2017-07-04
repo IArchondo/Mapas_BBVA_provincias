@@ -11,7 +11,7 @@ library(rgeos)
 cortador=function(dat,str,var){
   dicc_cut=grep(var,colnames(dat))
   cutvar=as.numeric(unlist(strsplit(str,split=",")))
-  cuteado=cut(dat[[dicc_cut]],breaks=cutvar,include.lowest = T)
+  cuteado=cut(dat[[dicc_cut]],breaks=cutvar,include.lowest = T,dig.lab=10)
   return(cuteado)
 }
 
