@@ -51,8 +51,10 @@ graphing=function(datax,setter,selCCAA,varsel,slidermed){
 
 modif=function(ggpl,mpdf,colmin='#89D1F3',colmax='#006EC1',medcheck,slidermed,acc){
   if (is.factor(mpdf[[acc]])==TRUE){
+    
+    gs.pal <- colorRampPalette(c(colmin,colmax),bias=.1,space="rgb")
     plot=ggpl+
-      scale_fill_discrete(label=comma)
+      scale_fill_manual(values=gs.pal(nlevels(mpdf[[acc]])),label=comma)
     return(plot)
   }
   else{

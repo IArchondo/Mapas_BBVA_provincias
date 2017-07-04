@@ -57,6 +57,10 @@ shinyUI(fluidPage(
                                      column(1,br()),
                                      column(6,sliderInput("slidermed",NULL,min=0,max=1,value=0.5),
                                      checkboxInput("automed",label="Incluir",value=FALSE)))),
+                  tabPanel("Tabla de datos",
+                           fluidRow(column(12,h3("Tabla de datos",style="color:#006EC1"))),
+                           fluidRow(column(12,helpText("Tabla actualizada con los datos cargados en el programa"))),
+                           fluidRow(column(12,br(),div(style='height:600px; overflow-y: scroll', tableOutput("datatot"))))),
                   tabPanel("Agregar datos",
                            fluidRow(column(12,h3("Cargar más datos",style="color:#006EC1"))),
                            fluidRow(column(12,helpText("El csv tiene que contener una columna 
@@ -68,11 +72,7 @@ shinyUI(fluidPage(
                                                         style="color: #fff; background-color: #337ab7; 
                                                         border-color: #2e6da4"))),
                            div(style='height:450px; overflow-y: scroll', tableOutput("csvdata"))),
-                  tabPanel("Tabla total",
-                           fluidRow(column(12,h3("Tabla de datos",style="color:#006EC1"))),
-                           fluidRow(column(12,helpText("Tabla actualizada con los datos cargados en el programa"))),
-                           fluidRow(column(12,br(),div(style='height:600px; overflow-y: scroll', tableOutput("datatot"))))),
-                  tabPanel("Variables/Cortar variables",
+                  tabPanel("Cortar variables",
                            fluidRow(column(12,h3("Cortar variables",style="color:#006EC1"))),
                            fluidRow(column(12,helpText("Introducir el nombre de la nueva variable y los 
                                                        puntos de corte separados por comas (ej: 3,5,8)"))),
