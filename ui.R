@@ -29,7 +29,8 @@ names(codccaa)=ccaa
 
 
 shinyUI(fluidPage(
-  titlePanel("Mapeador BBVA 3000"),
+  #titlePanel(div("Mapas BBVA (provincias)",style="color:#006EC1")),
+  titlePanel(div(img(src="logo3.png"))),
   sidebarLayout(
     sidebarPanel(
       helpText("Esta aplicación dibuja el mapa de España dependiendo de los datos introducidos"),
