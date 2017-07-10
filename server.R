@@ -2,6 +2,10 @@
 
 source("helper.R")
 
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load("maptools","dplyr","data.table","reshape2","ggplot2","plyr","rgdal","rgeos",
+               "shinyjs","scales","DT")
+
 library(maptools)
 library(dplyr)
 library(data.table)
